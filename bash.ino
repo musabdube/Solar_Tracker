@@ -2,18 +2,18 @@
 #include <CD74HC4067.h>
 
 const int initialPositionVal = 0;
-Servo Servohori;                  // servo for horizontal movement (BOTTOM SERVO)
-int servoh = initialPositionVal;  // initial horizontal position
-int servohLimitHigh = 175;        // maximum horizontal angle
-int servohLimitLow = 5;           // minimum horizontal angle
+Servo Servohori;                  
+int servoh = initialPositionVal;  
+int servohLimitHigh = 175;        
+int servohLimitLow = 5;           
 
-Servo Servoverti;                 // servo for vertical movement
-int servov = initialPositionVal;  // initial vertical position
-int servovLimitHigh = 175;        // maximum vertical angle
-int servovLimitLow = 5;           // minimum vertical angle
+Servo Servoverti;                 
+int servov = initialPositionVal;  
+int servovLimitHigh = 175;        
+int servovLimitLow = 5;           
 
-int tol = 30;        //Tolerance
-int SunsetVal = 50;  // the value to go back to zero
+int tol = 30;        
+int SunsetVal = 50;  
 // Pins for the CD74HC4067 multiplexer control
 const int MUX_S0 = 3;
 const int MUX_S1 = 4;
@@ -24,11 +24,11 @@ const int MUX_SIG = A0;  // Signal pin connected to the multiplexer
 CD74HC4067 mux(MUX_S0, MUX_S1, MUX_S2, MUX_S3);
 
 void setup() {
-  Serial.begin(9600);                    // initialize serial communication
-  Servohori.attach(9);                   // attach horizontal servo to pin 9
-  Servohori.write(initialPositionVal);   // set initial horizontal position
-  Servoverti.attach(10);                 // attach vertical servo to pin 10
-  Servoverti.write(initialPositionVal);  // set initial vertical position
+  Serial.begin(9600);                    
+  Servohori.attach(9);                   
+  Servohori.write(initialPositionVal);   
+  Servoverti.attach(10);                 
+  Servoverti.write(initialPositionVal);  
   delay(500);
 
   pinMode(MUX_S0, OUTPUT);  // set multiplexer control pins as output
@@ -115,14 +115,14 @@ void loop() {
 
   delay(10);
 
-  if (avrH1 < SunsetVal && avrH2 < SunsetVal && avrV1 < SunsetVal && avrV2 < SunsetVal) {  //Back to initial position
+  if (avrH1 < SunsetVal && avrH2 < SunsetVal && avrV1 < SunsetVal && avrV2 < SunsetVal) {  
     servoh = initialPositionVal;
     servov = initialPositionVal;
     Servoverti.write(servov);
     Servohori.write(servoh);
   }
 
-  // Print sensor values and servo positions
+ 
 
   Serial.println("Servo Positions->");
   Serial.print("Horizontal: ");
@@ -130,7 +130,6 @@ void loop() {
   Serial.print("Vertical: ");
   Serial.println(servov);
 
-  // Your servo control logic here...
-
+ 
   delay(1000);
 }
